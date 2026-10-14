@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbfbfe">
+  <meta name="description" content="Three authored Blender action references and their Wan video generations. A visual study for Ziyun Dai’s RSI World Model proposal.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>Blender → Wan — RSI World Model · Ziyun Dai</title>
+  <style>
+    :root{--bg:#fbfbfe;--paper:#fff;--ink:#24283e;--muted:#6b7186;--line:#e4e6ef;--blue:#6572d9;--lav:#f0edfb;--orange:#ba775b;--serif:Georgia,"Times New Roman",serif;--sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5}a{color:inherit;text-decoration:none}button,input{font:inherit}button,a,input{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #9d91e7;outline-offset:4px}.wrap{width:min(1120px,calc(100% - 56px));margin-inline:auto}
+    .site-nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(251,251,254,.96);backdrop-filter:blur(12px);z-index:10}.brand{display:flex;align-items:center;gap:11px;font-size:14px;font-weight:600;letter-spacing:-.02em}.brand-mark{height:27px;width:27px;flex-shrink:0;border:7px solid #8c84da;border-radius:9px;transform:rotate(-7deg)}.back-link{font-size:12px;color:var(--muted);padding:12px 0;white-space:nowrap}.back-link:hover{color:var(--blue)}
+    .hero{padding:72px 0 42px;display:grid;grid-template-columns:1fr .83fr;gap:70px;align-items:end}.eyebrow,.kicker{font:10px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}h1{font:500 clamp(52px,6.5vw,82px)/1.03 var(--serif);letter-spacing:-.06em;margin:18px 0 17px}h1 span{color:var(--blue)}.subtitle{font-size:17px;line-height:1.5;letter-spacing:-.02em;margin:0;max-width:440px}.hero-note{margin:0 0 4px;color:var(--muted);font-size:13px;line-height:1.8}.hero-note strong{font-weight:500;color:var(--ink)}
+    .study-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:0 0 28px;margin-bottom:34px}.study-nav a{font-size:11px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper)}.study-nav a:hover{border-color:#b8b6dd;color:var(--blue)}.study-nav a span{font:10px var(--mono);color:var(--blue);margin-right:6px}.study-nav>p{font-size:11px;color:var(--muted);margin:0 0 0 auto}
+    .study{border:1px solid var(--line);border-radius:17px;background:var(--paper);overflow:hidden;margin-bottom:28px;scroll-margin-top:100px}.study-head{padding:25px 27px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.kicker{color:var(--orange)}h2{font:400 33px/1.15 var(--serif);letter-spacing:-.04em;margin:9px 0 0}.action{font-size:12px;line-height:1.75;color:var(--muted);margin:0;max-width:440px}.pair-media{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--line)}figure{margin:0;min-width:0}figure+figure{border-left:1px solid var(--line)}figcaption{display:flex;justify-content:space-between;gap:10px;padding:11px 17px;font:10px/1.5 var(--mono);color:var(--blue);letter-spacing:.035em}figcaption span:last-child{color:var(--muted);letter-spacing:0}.video-stage{background:#e9ebf1;aspect-ratio:16/9;position:relative}video{display:block;width:100%;height:100%;object-fit:contain}.media-note{position:absolute;inset:0;display:grid;place-items:center;padding:25px;text-align:center;background:#f0f1f6;color:var(--muted);font-size:12px}.media-note[hidden]{display:none}
+    .transport{display:flex;align-items:center;gap:11px;padding:16px 18px}.play,.replay{border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);cursor:pointer;font-size:11px;min-height:38px;padding:9px 15px;white-space:nowrap}.play{min-width:114px;color:#fff;background:var(--ink);border-color:var(--ink)}.play:not(:disabled):hover{background:var(--blue);border-color:var(--blue)}.replay:not(:disabled):hover{border-color:var(--blue);color:var(--blue)}button:disabled{cursor:default;opacity:.45}.seek{min-width:60px;flex:1;height:24px;accent-color:var(--blue);cursor:pointer;margin:0 4px}.seek:disabled{cursor:default;opacity:.45}.time{font:10px var(--mono);white-space:nowrap;color:var(--muted);min-width:69px;text-align:right}.play-icon{display:inline-block;width:13px;text-align:center;margin-right:4px}
+    .review{display:grid;grid-template-columns:100px 1fr;gap:12px;border-top:1px solid var(--line);padding:17px 24px;background:#fcfcff;font-size:12px;line-height:1.7}.review-label{font:9px/1.8 var(--mono);letter-spacing:.08em;color:var(--blue);text-transform:uppercase;padding-top:2px}.review p{margin:0;color:var(--muted)}.review strong{font-weight:500;color:var(--ink)}.status{font-size:11px;line-height:1.6;color:var(--muted);margin:0;padding:0 24px 15px}.status:empty{display:none}
+    .context{padding:22px 0 54px;display:grid;grid-template-columns:1fr 1.5fr;gap:50px}.context h3{font:400 27px/1.2 var(--serif);letter-spacing:-.035em;margin:0}.context p{font-size:12px;line-height:1.85;color:var(--muted);margin:0}.context strong{font-weight:500;color:var(--ink)}.footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding:23px 0 28px;font:10px/1.7 var(--mono);color:var(--muted)}.footer strong{font-weight:500;color:var(--blue)}
+    @media(max-width:760px){.hero{grid-template-columns:1fr;gap:22px;padding:48px 0 28px}.hero-note{max-width:580px}.study-nav>p{margin:8px 0 0;width:100%}.study-head{grid-template-columns:1fr;gap:16px;padding:22px}.action{max-width:none}.pair-media{grid-template-columns:1fr}figure+figure{border-left:0;border-top:1px solid var(--line)}.context{grid-template-columns:1fr;gap:15px;padding:16px 0 40px}.transport{flex-wrap:wrap;padding:14px}.seek{order:3;flex-basis:calc(100% - 90px);margin:0}.time{order:4}.review{grid-template-columns:1fr;gap:5px;padding:17px 20px}.study{scroll-margin-top:85px}}
+    @media(max-width:480px){.wrap{width:calc(100% - 32px)}.site-nav{min-height:68px;gap:12px}.brand{font-size:11px;gap:7px}.brand-mark{height:22px;width:22px;border-width:6px;border-radius:7px}.back-link{font-size:10px}h1{font-size:55px}.subtitle{font-size:16px}h2{font-size:30px}figcaption{font-size:9px;padding:10px 13px}.study-head{padding:20px}.footer{display:block}.footer span{display:block;margin-bottom:5px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header class="wrap site-nav">
+    <a class="brand" href="index.html" aria-label="RSI World Model home"><span class="brand-mark" aria-hidden="true"></span><span>Ziyun Dai / RSI World Model</span></a>
+    <a class="back-link" href="index.html">← Back to the proposal</a>
+  </header>
+  <main class="wrap">
+    <div class="hero">
+      <div><div class="eyebrow">Three action references / candidate previews</div><h1>Blender <span>→</span> Wan</h1><p class="subtitle">Make the action visible.<br>Then give the scene an appearance.</p></div>
+      <p class="hero-note"><strong>Authored Blender reference → Wan 3.0 video edit.</strong> Each pair places a simple Blender animation beside its video-guided generation so the intended movement can be inspected. These are candidate concept demonstrations, not results from a learned policy or an RSI experiment.</p>
+    </div>
+    <nav class="study-nav" aria-label="Action studies"><a href="#mug-lift"><span>01</span> Lift a mug</a><a href="#door-pass"><span>02</span> Open a door</a><a href="#obstacle-route"><span>03</span> Choose a route</a><p>Play each pair together to compare the motion.</p></nav>
+
+    <article class="study" id="mug-lift" data-pair aria-labelledby="mug-title">
+      <div class="study-head"><div><div class="kicker">01 / Grasp &amp; contact</div><h2 id="mug-title">Reach. Grasp. Lift.</h2></div><p class="action">Bring the hand to the mug, establish contact, and lift it from the table. The action reference makes the order and timing explicit.</p></div>
+      <div class="pair-media">
+        <figure><figcaption><span>01 / BLENDER REFERENCE</span><span>authored action</span></figcaption><div class="video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/mug-lift-whitebox.jpg" aria-label="Blender reference for lifting a mug"><source src="assets/blender-20261014/mug-lift-whitebox.mp4" type="video/mp4"></video><div class="media-note" hidden>Blender reference is not available yet.</div></div></figure>
+        <figure><figcaption><span>02 / WAN GENERATION</span><span>video guidance</span></figcaption><div class="video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/mug-lift-wan.jpg" aria-label="Wan generation guided by the mug-lift reference"><source src="assets/blender-20261014/mug-lift-wan.mp4" type="video/mp4"></video><div class="media-note" hidden>Wan generation is not available yet.</div></div></figure>
+      </div>
+      <div class="transport" role="group" aria-label="Synchronized playback for lifting a mug"><button class="play" type="button" disabled aria-label="Play both mug-lift videos"><span class="play-icon" aria-hidden="true">▶</span><span class="play-text">Play both</span></button><button class="replay" type="button" disabled aria-label="Replay both mug-lift videos">↻ Replay</button><input class="seek" type="range" min="0" max="1" value="0" step="0.01" disabled aria-label="Mug-lift playback position"><output class="time" aria-hidden="true">0:00 / —</output></div>
+      <p class="status" role="status" aria-live="polite"></p>
+      <div class="review"><span class="review-label">Review focus</span><p data-review><strong>Hand–object contact.</strong> Check whether the hand reaches the mug before it moves, whether both move together, and whether the mug keeps its shape.</p></div>
+    </article>
+
+    <article class="study" id="door-pass" data-pair aria-labelledby="door-title">
+      <div class="study-head"><div><div class="kicker">02 / Hinge &amp; clearance</div><h2 id="door-title">Open a path.</h2></div><p class="action">Open the door before moving through the doorway. The hinge, opening angle, and body clearance give the action a visible set of constraints.</p></div>
+      <div class="pair-media">
+        <figure><figcaption><span>01 / BLENDER REFERENCE</span><span>authored action</span></figcaption><div class="video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/door-pass-whitebox.jpg" aria-label="Blender reference for opening and passing through a door"><source src="assets/blender-20261014/door-pass-whitebox.mp4" type="video/mp4"></video><div class="media-note" hidden>Blender reference is not available yet.</div></div></figure>
+        <figure><figcaption><span>02 / WAN GENERATION</span><span>video guidance</span></figcaption><div class="video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/door-pass-wan.jpg" aria-label="Wan generation guided by the door-passage reference"><source src="assets/blender-20261014/door-pass-wan.mp4" type="video/mp4"></video><div class="media-note" hidden>Wan generation is not available yet.</div></div></figure>
+      </div>
+      <div class="transport" role="group" aria-label="Synchronized playback for passing through a door"><button class="play" type="button" disabled aria-label="Play both door-passage videos"><span class="play-icon" aria-hidden="true">▶</span><span class="play-text">Play both</span></button><button class="replay" type="button" disabled aria-label="Replay both door-passage videos">↻ Replay</button><input class="seek" type="range" min="0" max="1" value="0" step="0.01" disabled aria-label="Door-passage playback position"><output class="time" aria-hidden="true">0:00 / —</output></div>
+      <p class="status" role="status" aria-live="polite"></p>
+      <div class="review"><span class="review-label">Review focus</span><p data-review><strong>Order and clearance.</strong> Check whether the door rotates around a fixed hinge, opens before the person passes, and stays separate from the body.</p></div>
+    </article>
+
+    <article class="study" id="obstacle-route" data-pair aria-labelledby="route-title">
+      <div class="study-head"><div><div class="kicker">03 / Route &amp; ground contact</div><h2 id="route-title">Go around. Keep moving.</h2></div><p class="action">Approach an obstacle, take a clear route around it, and continue toward the destination. The same simple layout anchors the movement across both views.</p></div>
+      <div class="pair-media">
+        <figure><figcaption><span>01 / BLENDER REFERENCE</span><span>authored action</span></figcaption><div class="video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/obstacle-route-whitebox.jpg" aria-label="Blender reference for walking around an obstacle"><source src="assets/blender-20261014/obstacle-route-whitebox.mp4" type="video/mp4"></video><div class="media-note" hidden>Blender reference is not available yet.</div></div></figure>
+        <figure><figcaption><span>02 / WAN GENERATION</span><span>video guidance</span></figcaption><div class="video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/obstacle-route-wan.jpg" aria-label="Wan generation guided by the obstacle-route reference"><source src="assets/blender-20261014/obstacle-route-wan.mp4" type="video/mp4"></video><div class="media-note" hidden>Wan generation is not available yet.</div></div></figure>
+      </div>
+      <div class="transport" role="group" aria-label="Synchronized playback for walking around an obstacle"><button class="play" type="button" disabled aria-label="Play both obstacle-route videos"><span class="play-icon" aria-hidden="true">▶</span><span class="play-text">Play both</span></button><button class="replay" type="button" disabled aria-label="Replay both obstacle-route videos">↻ Replay</button><input class="seek" type="range" min="0" max="1" value="0" step="0.01" disabled aria-label="Obstacle-route playback position"><output class="time" aria-hidden="true">0:00 / —</output></div>
+      <p class="status" role="status" aria-live="polite"></p>
+      <div class="review"><span class="review-label">Review focus</span><p data-review><strong>Path fidelity.</strong> Check whether the person follows the intended route, keeps clear of the obstacle, and maintains plausible foot contact with the ground.</p></div>
+    </article>
+
+    <aside class="context" aria-labelledby="context-title"><h3 id="context-title">A reference for the<br>larger RSI question.</h3><p>Here, the action sequences are authored in Blender. The proposed research would replace those fixed choices with a policy, evaluate the rendered consequences, and use failures to revise the process. <strong>Accepted trajectories would then become training data for the video model.</strong> These pairs illustrate the rendering step; they do not establish that this learning loop works.</p></aside>
+  </main>
+  <footer class="wrap footer"><span><strong>ZIYUN DAI</strong> / RSI WORLD MODEL</span><span>Authored references · generated video studies · 2026</span></footer>
+  <script>
+    (() => {
+      const pairs = [];
+      let active = null;
+      const format = value => `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}`;
+
+      document.querySelectorAll('[data-pair]').forEach(card => {
+        const videos = [...card.querySelectorAll('video')];
+        const play = card.querySelector('.play');
+        const replay = card.querySelector('.replay');
+        const seek = card.querySelector('.seek');
+        const time = card.querySelector('.time');
+        const status = card.querySelector('.status');
+        const name = card.querySelector('h2').textContent;
+        let duration = 0;
+        let playing = false;
+        let frame = 0;
+        let attempt = 0;
+        const ready = () => videos.every(video => !video.error && Number.isFinite(video.duration) && video.duration > 0);
+        const update = () => {
+          const position = Math.min(videos[0].currentTime || 0, duration);
+          seek.value = position;
+          seek.setAttribute('aria-valuetext', `${format(position)} of ${format(duration)}`);
+          time.textContent = `${format(position)} / ${duration ? format(duration) : '—'}`;
+        };
+        const updateButton = () => {
+          play.querySelector('.play-icon').textContent = playing ? 'Ⅱ' : '▶';
+          play.querySelector('.play-text').textContent = playing ? 'Pause both' : 'Play both';
+          play.setAttribute('aria-label', `${playing ? 'Pause' : 'Play'} both videos: ${name}`);
+        };
+        const pause = () => {
+          attempt++;
+          playing = false;
+          cancelAnimationFrame(frame);
+          videos.forEach(video => video.pause());
+          if (active === pair) active = null;
+          updateButton();
+          update();
+        };
+        const setPosition = position => {
+          const target = Math.max(0, Math.min(position, duration));
+          videos.forEach(video => { if (video.readyState) video.currentTime = target; });
+          update();
+        };
+        const tick = () => {
+          if (!playing) return;
+          const position = videos[0].currentTime;
+          if (position >= duration - 0.04 || videos.some(video => video.ended)) {
+            pause();
+            setPosition(duration);
+            return;
+          }
+          if (Math.abs(videos[1].currentTime - position) > 0.12 && !videos[1].seeking) videos[1].currentTime = position;
+          update();
+          frame = requestAnimationFrame(tick);
+        };
+        const start = async () => {
+          if (!ready()) return;
+          if (active && active !== pair) active.pause();
+          if (videos[0].currentTime >= duration - 0.08) setPosition(0);
+          const currentAttempt = ++attempt;
+          active = pair;
+          playing = true;
+          updateButton();
+          status.textContent = '';
+          try {
+            await Promise.all(videos.map(video => video.play()));
+            if (currentAttempt !== attempt || !playing) return;
+            cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(tick);
+          } catch (error) {
+            if (currentAttempt !== attempt) return;
+            pause();
+            status.textContent = 'Playback could not start. Please try Play both again.';
+          }
+        };
+        const refresh = () => {
+          const available = ready();
+          play.disabled = replay.disabled = seek.disabled = !available;
+          if (available) {
+            duration = Math.min(...videos.map(video => video.duration));
+            seek.max = duration;
+            status.textContent = '';
+            update();
+          }
+        };
+        const pair = {card, pause};
+        pairs.push(pair);
+        play.addEventListener('click', () => playing ? pause() : start());
+        replay.addEventListener('click', () => { pause(); setPosition(0); start(); });
+        seek.addEventListener('input', () => setPosition(Number(seek.value)));
+        videos.forEach(video => {
+          video.addEventListener('loadedmetadata', refresh);
+          video.addEventListener('durationchange', refresh);
+          video.addEventListener('ended', () => { pause(); setPosition(duration); });
+          const unavailable = () => {
+            pause();
+            play.disabled = replay.disabled = seek.disabled = true;
+            video.closest('.video-stage').querySelector('.media-note').hidden = false;
+            status.textContent = 'Both files are needed for synchronized playback.';
+          };
+          video.addEventListener('error', unavailable);
+          video.querySelector('source').addEventListener('error', unavailable);
+        });
+        refresh();
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden && active) active.pause();
+      });
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting && active?.card === entry.target) active.pause();
+          });
+        }, {threshold: 0});
+        pairs.forEach(pair => observer.observe(pair.card));
+      }
+      window.addEventListener('pagehide', () => { if (active) active.pause(); });
+    })();
+  </script>
+</body>
+</html>

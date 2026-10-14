@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbfbfe">
+  <meta name="description" content="RSI World Model by Ziyun Dai. A research proposal for policy-guided world exploration, recursive self-improvement, and learning video models from verified trajectories.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>RSI World Model — Ziyun Dai</title>
+  <style>
+    :root{--bg:#fbfbfe;--paper:#fff;--ink:#24283e;--muted:#6b7186;--line:#e4e6ef;--blue:#6572d9;--lav:#f0edfb;--green:#38866c;--mint:#edf6f1;--orange:#ba775b;--serif:Georgia,"Times New Roman",serif;--sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5}a{color:inherit;text-decoration:none}button,input{font:inherit}button,a,input{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #9d91e7;outline-offset:4px}.wrap{width:min(1120px,calc(100% - 56px));margin-inline:auto}
+    .site-nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(251,251,254,.96);backdrop-filter:blur(12px);z-index:10}.brand{display:flex;align-items:center;gap:11px;font-size:14px;font-weight:600;letter-spacing:-.02em}.brand-mark{height:27px;width:27px;flex-shrink:0;border:7px solid #8c84da;border-radius:9px;transform:rotate(-7deg)}.nav{display:flex;gap:25px;color:var(--muted);font-size:12px}.nav a{padding:12px 0}.nav a:hover{color:var(--blue)}
+    .hero{display:grid;grid-template-columns:1.07fr 1fr;gap:60px;align-items:center;padding:92px 0 90px}.eyebrow,.kicker{font:10px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}h1{font:500 clamp(64px,7.4vw,96px)/.97 var(--serif);letter-spacing:-.065em;margin:19px 0 24px}h1 span{display:block}h1 em{font-style:normal;color:var(--blue)}.hero-subtitle{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-.025em;margin:0 0 14px;max-width:510px}.lede{font-size:15px;line-height:1.75;color:var(--muted);max-width:535px;margin:0}.hero-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:27px}.pill{display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border:1px solid var(--line);border-radius:999px;font-size:12px;background:var(--paper)}.pill.primary{background:var(--ink);border-color:var(--ink);color:white}.pill:hover{border-color:var(--blue);color:var(--blue)}.pill.primary:hover{background:var(--blue);color:white}.byline{font-size:12px;color:var(--muted);margin-top:25px}.byline strong{color:var(--ink);font-weight:500}.status{display:inline-block;margin-left:8px;border-left:1px solid #ced1df;padding-left:10px;font-size:11px}
+    .loop-art{border:1px solid var(--line);border-radius:19px;background:var(--paper);padding:24px}.diagram-title{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--muted);font:10px var(--mono);letter-spacing:.04em;margin-bottom:20px}.diagram-title span:last-child{color:var(--blue)}.diagram-node{padding:16px;border:1px solid #e0e3ee;border-radius:10px;background:#fafafe;text-align:center}.diagram-node b{display:block;font-size:14px;font-weight:600}.diagram-node small{display:block;font-size:11px;color:var(--muted);margin-top:4px}.diagram-node.policy{background:var(--lav);border-color:#ddd6f2}.diagram-pair{display:grid;grid-template-columns:1fr 24px 1fr;align-items:center}.diagram-arrow{text-align:center;color:#9a9db1;font-size:19px;line-height:30px}.diagram-node.verified{background:var(--mint);border-color:#dbeae1}.diagram-forks{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:14px;padding-top:15px;border-top:1px solid var(--line)}.diagram-forks b{display:block;font:11px var(--mono);color:var(--blue)}.diagram-forks div:last-child b{color:var(--green)}.diagram-forks p{font-size:11px;line-height:1.5;color:var(--muted);margin:6px 0 0}.diagram-foot{margin:19px 0 0;font:10px/1.6 var(--mono);color:var(--muted)}
+    section{padding:78px 0;border-top:1px solid var(--line)}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:36px;margin-bottom:30px}.section-count{font:10px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}h2{font:500 clamp(37px,4.8vw,58px)/1.06 var(--serif);letter-spacing:-.055em;margin:13px 0 0}.intro{font-size:14px;line-height:1.7;color:var(--muted);max-width:390px;margin:0}.pipeline{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:15px;background:var(--paper);overflow:hidden}.pipeline article{padding:23px;position:relative}.pipeline article+article{border-left:1px solid var(--line)}.step-number{font:10px var(--mono);color:var(--blue)}.pipeline h3{font-size:16px;letter-spacing:-.025em;font-weight:600;margin:22px 0 9px}.pipeline p{font-size:12px;line-height:1.65;color:var(--muted);margin:0}.pipeline .step-role{display:block;font:10px/1.5 var(--mono);color:var(--blue);margin-top:18px}.system-note{margin:18px 0 0;font-size:12px;line-height:1.65;color:var(--muted)}.system-note strong{color:var(--ink);font-weight:500}
+    .learning-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.learning-card{border:1px solid var(--line);border-radius:15px;padding:25px;background:var(--paper)}.learning-card.failure{border-top:3px solid #b1a3e2}.learning-card.success{border-top:3px solid #89bba4}.learning-card h3{font:400 30px/1.1 var(--serif);letter-spacing:-.035em;margin:13px 0 13px}.learning-card>p{font-size:13px;line-height:1.7;color:var(--muted);margin:0}.learning-route{margin:23px 0 18px;padding:13px 0;border-block:1px solid var(--line);font:11px/1.75 var(--mono);color:var(--blue)}.success .learning-route{color:var(--green)}.learning-card .changes{font-size:11px;line-height:1.65;color:var(--muted)}.changes b{font-weight:500;color:var(--ink)}.question-strip{display:flex;align-items:flex-start;gap:19px;padding:20px 23px;margin-top:20px;background:#f2f1f9;border:1px solid #e6e3f1;border-radius:12px}.question-strip .kicker{white-space:nowrap;padding-top:3px}.question-strip p{margin:0;font:400 19px/1.5 var(--serif);letter-spacing:-.01em}.question-strip small{font:11px var(--sans);color:var(--muted)}
+    .exploration{border:1px solid var(--line);border-radius:16px;background:var(--paper);overflow:hidden}.exploration video{display:block;aspect-ratio:16/9;width:100%;object-fit:contain;background:#e9edf0}.exploration-caption{display:flex;justify-content:space-between;gap:35px;padding:22px 25px}.exploration-caption h3{font:400 28px/1.2 var(--serif);margin:5px 0 0;letter-spacing:-.025em}.exploration-caption p{font-size:12px;line-height:1.65;color:var(--muted);max-width:530px;margin:0}.hypothesis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:26px}.hypothesis article{padding:18px 0;border-top:1px solid var(--line)}.hypothesis h3{font-size:13px;font-weight:600;margin:0 0 7px}.hypothesis p{font-size:12px;line-height:1.65;color:var(--muted);margin:0}
+    .closing{text-align:center;padding:74px 0}.closing h2{max-width:760px;margin:14px auto 20px;font-size:clamp(39px,5vw,62px)}.closing p{font-size:14px;line-height:1.7;max-width:625px;margin:0 auto;color:var(--muted)}.footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding:23px 0 28px;font:10px/1.7 var(--mono);color:var(--muted)}.footer strong{font-weight:500;color:var(--blue)}
+    @media(max-width:900px){.hero{grid-template-columns:1fr 1fr;gap:30px}h1{font-size:73px}.loop-art{padding:18px}.pipeline article{padding:20px 16px}.pipeline h3{font-size:14px}.section-head{gap:28px}.intro{max-width:350px}}
+    @media(max-width:720px){.wrap{width:calc(100% - 36px)}.hero{grid-template-columns:1fr;padding:55px 0 62px;gap:32px}h1{font-size:78px}.loop-art{max-width:none;padding:23px}.site-nav{min-height:68px;gap:14px}.brand{font-size:12px}.nav{gap:13px;font-size:10px}.section-head{display:block}.intro{margin-top:20px;max-width:520px}section{padding:62px 0}.pipeline{grid-template-columns:1fr 1fr}.pipeline article:nth-child(3){border-left:0}.pipeline article:nth-child(n+3){border-top:1px solid var(--line)}.learning-grid{grid-template-columns:1fr}.exploration-caption{display:block;padding:20px}.exploration-caption p{margin-top:13px}.hypothesis{grid-template-columns:1fr;gap:0;margin-top:18px}.hypothesis article{padding:17px 0}.question-strip{display:block}.question-strip p{margin-top:8px}.footer{display:block}.footer span{display:block;margin-bottom:5px}}
+    @media(max-width:430px){.nav{gap:11px}.brand-mark{height:22px;width:22px;border-width:6px;border-radius:7px}.brand{gap:7px;font-size:11px}h1{font-size:65px}.hero-subtitle{font-size:18px}.hero .eyebrow{font-size:9px}.byline .status{display:block;margin:8px 0 0;padding:0;border:0}}
+    .intro{flex:0 1 390px}.section-head>div{flex:1 1 0;min-width:0}
+    @media(max-width:600px){html{scroll-padding-top:130px}.site-nav{flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;padding:15px 0 8px}.brand{font-size:12px}.nav{width:100%;justify-content:space-between;gap:10px;font-size:10px}.nav a{padding:9px 0}}
+
+    .demo-notice{display:grid;grid-template-columns:190px 1fr;gap:24px;padding:20px 24px;margin:0 0 25px;border:1px solid #e2def1;border-radius:12px;background:#f3f1fa}.demo-notice strong{font:11px/1.7 var(--mono);color:var(--blue)}.demo-notice p{margin:0;color:var(--muted);font-size:12px;line-height:1.75}.demo-notice p b{color:var(--ink);font-weight:500}
+    .demo-card{border:1px solid var(--line);border-radius:16px;background:var(--paper);overflow:hidden;margin-bottom:28px;scroll-margin-top:110px}.demo-head{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:36px;padding:25px 27px}.demo-title{font:400 33px/1.15 var(--serif);letter-spacing:-.035em;margin:9px 0 0}.demo-action{font-size:12px;line-height:1.75;color:var(--muted);margin:0;max-width:440px}.demo-tag{font:9px/1.5 var(--mono);letter-spacing:.06em;color:var(--orange);text-transform:uppercase}
+    .demo-media{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--line)}.demo-media figure{margin:0;min-width:0}.demo-media figure+figure{border-left:1px solid var(--line)}.demo-media figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 17px;font:10px/1.5 var(--mono);letter-spacing:.035em;color:var(--blue)}.demo-media figcaption span:last-child{font-size:9px;color:var(--muted);letter-spacing:0}.demo-video-stage{aspect-ratio:16/9;background:#e9ebf1;position:relative}.demo-video-stage video{display:block;width:100%;height:100%;object-fit:contain}.demo-media-note{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;background:#f0f1f6;color:var(--muted);font-size:12px}.demo-media-note[hidden]{display:none}
+    .demo-transport{display:flex;align-items:center;gap:11px;padding:16px 20px}.demo-play,.demo-replay{border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);cursor:pointer;font-size:11px;min-height:40px;padding:9px 15px;white-space:nowrap}.demo-play{min-width:114px;color:#fff;background:var(--ink);border-color:var(--ink)}.demo-play:not(:disabled):hover{background:var(--blue);border-color:var(--blue)}.demo-replay:not(:disabled):hover{border-color:var(--blue);color:var(--blue)}.demo-transport button:disabled{cursor:default;opacity:.45}.demo-seek{min-width:60px;flex:1;height:24px;accent-color:var(--blue);cursor:pointer;margin:0 4px}.demo-seek:disabled{cursor:default;opacity:.45}.demo-time{font:10px var(--mono);white-space:nowrap;color:var(--muted);min-width:69px;text-align:right}.demo-play-icon{display:inline-block;width:13px;text-align:center;margin-right:4px}.demo-status{font-size:11px;line-height:1.6;color:var(--muted);margin:0;padding:0 24px 15px}.demo-status:empty{display:none}
+    .demo-learning{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line);background:#fcfcff;margin:0}.demo-learning>div{padding:19px 23px}.demo-learning>div+div{border-left:1px solid var(--line)}.demo-learning dt{font:9px/1.6 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}.demo-learning>div:last-child dt{color:var(--green)}.demo-learning dd{margin:0;font-size:12px;line-height:1.75;color:var(--muted)}.demo-return{display:flex;align-items:center;gap:30px;justify-content:space-between;margin-top:30px;padding:23px 0 0;border-top:1px solid var(--line)}.demo-return p{margin:0;max-width:760px;font-size:14px;line-height:1.75;color:var(--muted)}.demo-return strong{color:var(--ink);font-weight:500}.demo-return a{white-space:nowrap;color:var(--blue);font-size:12px;padding:9px 0}
+    @media(max-width:760px){.demo-notice{grid-template-columns:1fr;gap:8px;padding:18px 20px}.demo-head{grid-template-columns:1fr;gap:15px;padding:21px}.demo-action{max-width:none}.demo-media{grid-template-columns:1fr}.demo-media figure+figure{border-left:0;border-top:1px solid var(--line)}.demo-learning{grid-template-columns:1fr}.demo-learning>div{padding:16px 20px}.demo-learning>div+div{border-left:0;border-top:1px solid var(--line)}.demo-return{display:block}.demo-return a{display:inline-block;margin-top:10px}.demo-title{font-size:30px}.demo-card{scroll-margin-top:140px}}
+    @media(max-width:480px){.demo-transport{flex-wrap:wrap;padding:14px}.demo-seek{order:3;flex-basis:calc(100% - 90px);margin:0}.demo-time{order:4}.demo-media figcaption{padding:10px 13px;font-size:9px}.demo-media figcaption span:last-child{font-size:8px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header class="wrap site-nav">
+    <a class="brand" href="#top" aria-label="RSI World Model home"><span class="brand-mark" aria-hidden="true"></span><span>Ziyun Dai / RSI World Model</span></a>
+    <nav class="nav" aria-label="Main navigation"><a href="#process">Process</a><a href="#rsi">RSI loop</a><a href="#demos">Concept demos</a><a href="#exploration">Concept film</a></nav>
+  </header>
+  <main id="top">
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow">Recursive self-improvement for generative worlds</div>
+        <h1><em>RSI</em><span>World Model</span></h1>
+        <p class="hero-subtitle">A policy explores. A video model renders.<br>The experience becomes the next lesson.</p>
+        <p class="lede">Start with a simple, executable world. Let a policy move a character through it, use that trajectory to guide video generation, and turn verified experience into better models—again and again.</p>
+        <div class="hero-links"><a class="pill primary" href="#rsi">Follow the RSI loop ↘</a><a class="pill" href="#demos">See the concept demos ↘</a></div>
+        <p class="byline"><strong>Ziyun (Olivia) Dai</strong><span class="status">Research proposal · experiments pending</span></p>
+      </div>
+      <div class="loop-art" role="img" aria-label="Proposed system. A policy controls an avatar in a coded white-box environment. A video model would render a visual future. Verification returns failures to recursive self-improvement and good trajectories to video-model fine-tuning.">
+        <div class="diagram-title"><span>THE PROPOSED LEARNING CYCLE</span><span>↻ RSI</span></div>
+        <div class="diagram-node policy"><b>Policy</b><small>choose actions · move the character</small></div>
+        <div class="diagram-arrow" aria-hidden="true">↓</div>
+        <div class="diagram-pair"><div class="diagram-node"><b>White-box world</b><small>state + action trajectory</small></div><span class="diagram-arrow" aria-hidden="true">→</span><div class="diagram-node"><b>Video renderer</b><small>conditioned visual future</small></div></div>
+        <div class="diagram-arrow" aria-hidden="true">↓</div>
+        <div class="diagram-node verified"><b>Verify the experience</b><small>physical consistency · action fidelity · continuity</small></div>
+        <div class="diagram-forks"><div><b>↖ Failure → RSI</b><p>Revise policy, planning, and checks; explore again.</p></div><div><b>↗ Good trajectory → training</b><p>Fine-tune the video model on accepted experience.</p></div></div>
+        <p class="diagram-foot">Coding LLM builds the environment.<br>RSI closes the loop across successive rounds.</p>
+      </div>
+    </div>
+
+    <section id="process"><div class="wrap">
+      <div class="section-head"><div><div class="section-count">01 / POLICY-GUIDED GENERATION</div><h2>Give the world a structure.<br>Give the policy a choice.</h2></div><p class="intro">The scene is deliberately simple at first. Geometry, a character, and a route make the intended action visible before the video model adds appearance.</p></div>
+      <div class="pipeline">
+        <article><span class="step-number">01 / BUILD</span><h3>Code the environment</h3><p>A coding LLM constructs a small executable scene with objects, traversable space, and explicit state.</p><span class="step-role">Coding LLM → environment</span></article>
+        <article><span class="step-number">02 / ACT</span><h3>Control the character</h3><p>A policy selects actions. The character moves through the white-box world, producing an observable trajectory.</p><span class="step-role">Policy → actions + rollout</span></article>
+        <article><span class="step-number">03 / RENDER</span><h3>Generate the visual world</h3><p>The video model uses the scene and trajectory as conditioning to render a richer, action-dependent future.</p><span class="step-role">Video model → visual future</span></article>
+        <article><span class="step-number">04 / VERIFY</span><h3>Judge what happened</h3><p>Check whether the render follows the intended action, preserves the scene, and respects physical constraints.</p><span class="step-role">Verifier → feedback + selection</span></article>
+      </div>
+      <p class="system-note"><strong>The research target:</strong> controllable generation in which changing the policy’s action changes the rendered future in a predictable way.</p>
+    </div></section>
+
+    <section id="rsi"><div class="wrap">
+      <div class="section-head"><div><div class="section-count">02 / RECURSIVE SELF-IMPROVEMENT</div><h2>Every round feeds<br>the next one.</h2></div><p class="intro">RSI is the central idea. Failures improve how the system explores and evaluates; good trajectories become training data for the video model.</p></div>
+      <div class="learning-grid">
+        <article class="learning-card failure"><div class="kicker">Branch A / learn from failure</div><h3>Improve the process.</h3><p>A collision, a missed turn, or a disappearing object becomes a trace to inspect. The outer loop diagnoses the cause, proposes a targeted change, and tests it on new rollouts.</p><div class="learning-route">Failure → diagnose → revise → re-test ↻</div><div class="changes"><b>What changes:</b> the policy or planner, environment code where needed, and evaluation or data-selection rules. Each proposed change needs an independent check.</div></article>
+        <article class="learning-card success"><div class="kicker">Branch B / learn from good experience</div><h3>Improve the video model.</h3><p>Retain trajectories that pass the checks, together with their states, actions, and rendered frames. Use this selected experience to fine-tune the video model for the next round.</p><div class="learning-route">Verified rollout → training set → video update ↻</div><div class="changes"><b>What changes:</b> the video model’s weights, starting with fine-tuning on selected trajectories. Reward-guided generative RL would be evaluated as a further training strategy.</div></article>
+      </div>
+      <div class="question-strip"><span class="kicker">Research question</span><p>Can recursive exploration and verified self-generated data make a video world model more controllable and physically consistent?<br><small>A hypothesis to test through future training and held-out evaluation.</small></p></div>
+    </div></section>
+
+    <section id="demos" aria-labelledby="demos-title"><div class="wrap">
+      <div class="section-head"><div><div class="section-count">03 / CONCEPT DEMONSTRATIONS</div><h2 id="demos-title">Three actions.<br>One proposed RSI loop.</h2></div><p class="intro">These pairs make the control → render step visible. The research question comes next: how should feedback change the next action, and which trajectories should train the video model?</p></div>
+      <aside class="demo-notice" aria-label="Concept demonstration status"><strong>CONCEPT DEMOS ONLY<br>Blender → Wan 3.0</strong><p><b>What is shown:</b> hand-authored Blender animations used to guide Wan video generation. The policy decisions and feedback loops described below are proposed research. No policy learning, RSI training, or physical-accuracy gains have been demonstrated here.</p></aside>
+
+      <article class="demo-card" id="mug-lift" data-pair aria-labelledby="mug-lift-title">
+        <div class="demo-head"><div><div class="demo-tag">01 / Grasp &amp; contact · Concept demo</div><h3 class="demo-title" data-pair-title id="mug-lift-title">Reach. Grasp. Lift.</h3></div><p class="demo-action">A hand approaches the handle, makes contact, and lifts the mug. The reference makes the action order visible before the scene is rendered.</p></div>
+        <div class="demo-media"><figure><figcaption><span>BLENDER WHITE MODEL</span><span>authored motion</span></figcaption><div class="demo-video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/mug-lift-whitebox.jpg" aria-label="BLENDER WHITE MODEL: Reach. Grasp. Lift."><source src="assets/blender-20261014/mug-lift-whitebox.mp4" type="video/mp4"></video><div class="demo-media-note" hidden>Video could not be loaded.</div></div></figure><figure><figcaption><span>WAN 3.0 VIDEO</span><span>video-guided generation</span></figcaption><div class="demo-video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/mug-lift-wan.jpg" aria-label="WAN 3.0 VIDEO: Reach. Grasp. Lift."><source src="assets/blender-20261014/mug-lift-wan.mp4" type="video/mp4"></video><div class="demo-media-note" hidden>Video could not be loaded.</div></div></figure></div>
+        <div class="demo-transport" role="group" aria-label="Synchronized playback: Reach. Grasp. Lift."><button class="demo-play" type="button" disabled aria-label="Play both videos: Reach. Grasp. Lift."><span class="demo-play-icon" aria-hidden="true">▶</span><span class="demo-play-text">Play both</span></button><button class="demo-replay" type="button" disabled aria-label="Replay both videos: Reach. Grasp. Lift.">↻ Replay</button><input class="demo-seek" type="range" min="0" max="1" value="0" step="0.01" disabled aria-label="Playback position: Reach. Grasp. Lift."><output class="demo-time" aria-hidden="true">0:00 / —</output></div>
+        <p class="demo-status" role="status" aria-live="polite"></p>
+        <dl class="demo-learning" aria-label="Proposed learning loop for Reach. Grasp. Lift."><div><dt>Policy choice / proposed</dt><dd>Choose the approach, hand alignment, and moment to lift.</dd></div><div><dt>Failure → RSI / proposed</dt><dd>If the hand misses or the mug slips, revise the grasp timing and test another rollout.</dd></div><div><dt>Accepted → training / proposed</dt><dd>Only a checked, stable hand–mug trajectory would enter the video-model training set.</dd></div></dl>
+      </article>
+
+      <article class="demo-card" id="door-pass" data-pair aria-labelledby="door-pass-title">
+        <div class="demo-head"><div><div class="demo-tag">02 / Hinge &amp; clearance · Concept demo</div><h3 class="demo-title" data-pair-title id="door-pass-title">Open a path.</h3></div><p class="demo-action">Open the door, make room, then step through. Hinge motion and body clearance give the proposed policy concrete constraints to act on.</p></div>
+        <div class="demo-media"><figure><figcaption><span>BLENDER WHITE MODEL</span><span>authored motion</span></figcaption><div class="demo-video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/door-pass-whitebox.jpg" aria-label="BLENDER WHITE MODEL: Open a path."><source src="assets/blender-20261014/door-pass-whitebox.mp4" type="video/mp4"></video><div class="demo-media-note" hidden>Video could not be loaded.</div></div></figure><figure><figcaption><span>WAN 3.0 VIDEO</span><span>video-guided generation</span></figcaption><div class="demo-video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/door-pass-wan.jpg" aria-label="WAN 3.0 VIDEO: Open a path."><source src="assets/blender-20261014/door-pass-wan.mp4" type="video/mp4"></video><div class="demo-media-note" hidden>Video could not be loaded.</div></div></figure></div>
+        <div class="demo-transport" role="group" aria-label="Synchronized playback: Open a path."><button class="demo-play" type="button" disabled aria-label="Play both videos: Open a path."><span class="demo-play-icon" aria-hidden="true">▶</span><span class="demo-play-text">Play both</span></button><button class="demo-replay" type="button" disabled aria-label="Replay both videos: Open a path.">↻ Replay</button><input class="demo-seek" type="range" min="0" max="1" value="0" step="0.01" disabled aria-label="Playback position: Open a path."><output class="demo-time" aria-hidden="true">0:00 / —</output></div>
+        <p class="demo-status" role="status" aria-live="polite"></p>
+        <dl class="demo-learning" aria-label="Proposed learning loop for Open a path."><div><dt>Policy choice / proposed</dt><dd>Choose how far to open the door and when to move through.</dd></div><div><dt>Failure → RSI / proposed</dt><dd>If the body clips the door or moves too early, revise the opening angle and action sequence.</dd></div><div><dt>Accepted → training / proposed</dt><dd>A trajectory with checked contact, clearance, and continuity would become training data.</dd></div></dl>
+      </article>
+
+      <article class="demo-card" id="obstacle-route" data-pair aria-labelledby="obstacle-route-title">
+        <div class="demo-head"><div><div class="demo-tag">03 / Route &amp; ground contact · Concept demo</div><h3 class="demo-title" data-pair-title id="obstacle-route-title">Go around. Keep moving.</h3></div><p class="demo-action">Move around a planter and continue toward a destination. A shared layout lets the intended route be compared with the generated motion.</p></div>
+        <div class="demo-media"><figure><figcaption><span>BLENDER WHITE MODEL</span><span>authored motion</span></figcaption><div class="demo-video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/obstacle-route-whitebox.jpg" aria-label="BLENDER WHITE MODEL: Go around. Keep moving."><source src="assets/blender-20261014/obstacle-route-whitebox.mp4" type="video/mp4"></video><div class="demo-media-note" hidden>Video could not be loaded.</div></div></figure><figure><figcaption><span>WAN 3.0 VIDEO</span><span>video-guided generation</span></figcaption><div class="demo-video-stage"><video muted playsinline preload="metadata" poster="assets/blender-20261014/obstacle-route-wan.jpg" aria-label="WAN 3.0 VIDEO: Go around. Keep moving."><source src="assets/blender-20261014/obstacle-route-wan.mp4" type="video/mp4"></video><div class="demo-media-note" hidden>Video could not be loaded.</div></div></figure></div>
+        <div class="demo-transport" role="group" aria-label="Synchronized playback: Go around. Keep moving."><button class="demo-play" type="button" disabled aria-label="Play both videos: Go around. Keep moving."><span class="demo-play-icon" aria-hidden="true">▶</span><span class="demo-play-text">Play both</span></button><button class="demo-replay" type="button" disabled aria-label="Replay both videos: Go around. Keep moving.">↻ Replay</button><input class="demo-seek" type="range" min="0" max="1" value="0" step="0.01" disabled aria-label="Playback position: Go around. Keep moving."><output class="demo-time" aria-hidden="true">0:00 / —</output></div>
+        <p class="demo-status" role="status" aria-live="polite"></p>
+        <dl class="demo-learning" aria-label="Proposed learning loop for Go around. Keep moving."><div><dt>Policy choice / proposed</dt><dd>Choose a route and pace that keep the character clear of the obstacle.</dd></div><div><dt>Failure → RSI / proposed</dt><dd>If the path cuts through the planter or feet slide, revise the route and movement timing.</dd></div><div><dt>Accepted → training / proposed</dt><dd>A checked route with consistent scene geometry and ground contact would be retained.</dd></div></dl>
+      </article>
+      <div class="demo-return"><p><strong>The contribution to pursue is the RSI loop:</strong> use failures to revise the process, test those revisions on new rollouts, and use accepted experience to fine-tune the video model for the next round.</p><a href="#rsi">Back to the RSI loop ↑</a></div>
+    </div></section>
+
+    <section id="exploration"><div class="wrap">
+      <div class="section-head"><div><div class="section-count">04 / CONCEPT FILM</div><h2>One character.<br>A changing world.</h2></div><p class="intro">A short visual interpretation of the research direction: a character at the centre of a world that changes around them.</p></div>
+      <div class="exploration"><video controls muted playsinline preload="metadata" poster="assets/world-centered-exploration-poster.jpg" aria-label="A centered character exploring a changing environment"><source src="assets/world-centered-exploration.mp4" type="video/mp4"></video><div class="exploration-caption"><div><div class="kicker">Concept film / Wan 3.0</div><h3>One character. An unfolding world.</h3></div><p>Generated with Wan 3.0 to illustrate the intended experience. This is a concept film; it does not demonstrate a trained policy, an RSI loop, or improved physical accuracy.</p></div></div>
+      <div class="hypothesis"><article><h3>Action fidelity</h3><p>Does the visible motion follow the action selected by the policy?</p></article><article><h3>World consistency</h3><p>Do layout, objects, and the character remain coherent as the viewpoint changes?</p></article><article><h3>Improvement across rounds</h3><p>Do accepted updates improve unseen rollouts without losing earlier capabilities?</p></article></div>
+    </div></section>
+
+    <section class="closing"><div class="wrap"><div class="eyebrow">RSI World Model / a research proposal</div><h2>Explore. Verify. Learn.<br>Then explore a better world.</h2><p>The aim is a generative world model whose own experience becomes a source of improvement: failures refine the process, and verified trajectories train the video model.</p></div></section>
+  </main>
+  <footer class="wrap footer"><span><strong>ZIYUN DAI</strong> / RSI WORLD MODEL</span><span>Research proposal · concept demonstrations · 2026</span></footer>
+  <script>
+    (() => {
+      const pairs = [];
+      const conceptFilm = document.querySelector('#exploration video');
+      let active = null;
+      const format = value => `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}`;
+
+      document.querySelectorAll('[data-pair]').forEach(card => {
+        const videos = [...card.querySelectorAll('video')];
+        const play = card.querySelector('.demo-play');
+        const replay = card.querySelector('.demo-replay');
+        const seek = card.querySelector('.demo-seek');
+        const time = card.querySelector('.demo-time');
+        const status = card.querySelector('.demo-status');
+        const name = card.querySelector('[data-pair-title]').textContent;
+        let duration = 0;
+        let playing = false;
+        let frame = 0;
+        let attempt = 0;
+        const ready = () => videos.every(video => !video.error && Number.isFinite(video.duration) && video.duration > 0);
+        const update = () => {
+          const position = Math.min(videos[0].currentTime || 0, duration);
+          seek.value = position;
+          seek.setAttribute('aria-valuetext', `${format(position)} of ${format(duration)}`);
+          time.textContent = `${format(position)} / ${duration ? format(duration) : '—'}`;
+        };
+        const updateButton = () => {
+          play.querySelector('.demo-play-icon').textContent = playing ? 'Ⅱ' : '▶';
+          play.querySelector('.demo-play-text').textContent = playing ? 'Pause both' : 'Play both';
+          play.setAttribute('aria-label', `${playing ? 'Pause' : 'Play'} both videos: ${name}`);
+        };
+        const pause = () => {
+          attempt++;
+          playing = false;
+          cancelAnimationFrame(frame);
+          videos.forEach(video => video.pause());
+          if (active === pair) active = null;
+          updateButton();
+          update();
+        };
+        const setPosition = position => {
+          const target = Math.max(0, Math.min(position, duration));
+          videos.forEach(video => { if (video.readyState) video.currentTime = target; });
+          update();
+        };
+        const tick = () => {
+          if (!playing) return;
+          const position = videos[0].currentTime;
+          if (position >= duration - 0.04 || videos.some(video => video.ended)) {
+            pause();
+            setPosition(duration);
+            return;
+          }
+          if (Math.abs(videos[1].currentTime - position) > 0.12 && !videos[1].seeking) videos[1].currentTime = position;
+          update();
+          frame = requestAnimationFrame(tick);
+        };
+        const start = async () => {
+          if (!ready()) return;
+          conceptFilm?.pause();
+          if (active && active !== pair) active.pause();
+          if (videos[0].currentTime >= duration - 0.08) setPosition(0);
+          const currentAttempt = ++attempt;
+          active = pair;
+          playing = true;
+          updateButton();
+          status.textContent = '';
+          try {
+            await Promise.all(videos.map(video => video.play()));
+            if (currentAttempt !== attempt || !playing) return;
+            cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(tick);
+          } catch (error) {
+            if (currentAttempt !== attempt) return;
+            pause();
+            status.textContent = 'Playback could not start. Please try Play both again.';
+          }
+        };
+        const refresh = () => {
+          const available = ready();
+          play.disabled = replay.disabled = seek.disabled = !available;
+          if (available) {
+            duration = Math.min(...videos.map(video => video.duration));
+            seek.max = duration;
+            status.textContent = '';
+            update();
+          }
+        };
+        const pair = {card, pause};
+        pairs.push(pair);
+        play.addEventListener('click', () => playing ? pause() : start());
+        replay.addEventListener('click', () => { pause(); setPosition(0); start(); });
+        seek.addEventListener('input', () => setPosition(Number(seek.value)));
+        videos.forEach(video => {
+          video.addEventListener('loadedmetadata', refresh);
+          video.addEventListener('durationchange', refresh);
+          video.addEventListener('ended', () => { pause(); setPosition(duration); });
+          const unavailable = () => {
+            pause();
+            play.disabled = replay.disabled = seek.disabled = true;
+            video.closest('.demo-video-stage').querySelector('.demo-media-note').hidden = false;
+            status.textContent = 'Both files are needed for synchronized playback.';
+          };
+          video.addEventListener('error', unavailable);
+          video.querySelector('source').addEventListener('error', unavailable);
+        });
+        refresh();
+      });
+
+      conceptFilm?.addEventListener('play', () => { if (active) active.pause(); });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden && active) active.pause();
+      });
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting && active?.card === entry.target) active.pause();
+          });
+        }, {threshold: 0});
+        pairs.forEach(pair => observer.observe(pair.card));
+      }
+      window.addEventListener('pagehide', () => { if (active) active.pause(); });
+    })();
+  </script>
+</body>
+</html>
